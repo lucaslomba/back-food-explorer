@@ -1,5 +1,7 @@
 require("dotenv/config")
 
+const AppError = require("./utils/AppError")
+
 const express = require("express")
 const app = express()
 
