@@ -4,7 +4,6 @@ class UsersController {
     }
 
     async update(request, response){
-        console.log(request, response)
     }
 }
 
