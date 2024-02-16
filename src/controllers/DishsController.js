@@ -1,9 +1,9 @@
 class DishsController {
     async create(request, response){
-        const { title, description, tags, links } = request.body
+        const { name, category, price, description, ingredients } = request.body
         const user_id = request.user.id
 
-        console.log(title)
+        console.log(name, category, price, description, ingredients)
         console.log(user_id)
 
         return response.json()
