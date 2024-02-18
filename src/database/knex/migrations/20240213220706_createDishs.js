@@ -6,6 +6,7 @@ exports.up = knex => knex.schema.createTable("dishs", table => {
         .notNullable().default("meal")
     table.text("price")
     table.text("description")
+    table.text("filename")
     table.integer("user_id").references("id").inTable("users")
 
     table.timestamp("created_at").default(knex.fn.now())
