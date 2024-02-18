@@ -8,12 +8,16 @@ class DishsController {
         const avatarFilename = request.file.filename
         const user_id = request.user.id
 
+        const diskStorage = new DiskStorage
+        const filename = await diskStorage.saveFile(avatarFilename)
+
         const [dish_id] = await knex("dishs").insert({
             name,
             category,
             price,
             description,
-            user_id
+            user_id,
+            filename
         })
 
         const ingredientsInsert = ingredientsArray.map(ingredient => {
