@@ -13,5 +13,6 @@ const upload = multer(uploadConfig.MULTER)
 
 dishsRoutes.post("/",ensureAuthenticated, upload.single("dishFile"), dishsController.create)
 dishsRoutes.get("/",ensureAuthenticated, dishsController.index)
+dishsRoutes.get("/:id",ensureAuthenticated, dishsController.show)
 
 module.exports = dishsRoutes
