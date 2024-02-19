@@ -33,9 +33,9 @@ class DishsController {
     }
 
     async index(request, response){
-        const { type } = request.query
+        const { type, search } = request.query
 
-        let dishs = await knex("dishs").where({ category: type }).orderBy("name")
+        let dishs = await knex("dishs").where({ category: type }).whereLike("name", `%${search}%`).orderBy("name")
 
         return response.json(dishs)
     }
