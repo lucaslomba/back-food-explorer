@@ -10,8 +10,8 @@ const dishsController = new DishsController()
 
 const dishsRoutes = Router()
 const upload = multer(uploadConfig.MULTER)
-// dishsRoutes.use(ensureAuthenticated)
 
 dishsRoutes.post("/",ensureAuthenticated, upload.single("dishFile"), dishsController.create)
+dishsRoutes.get("/",ensureAuthenticated, dishsController.index)
 
 module.exports = dishsRoutes
