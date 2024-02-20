@@ -45,6 +45,8 @@ class DishsController {
     }
 
     async update(request, response){
+        const { name, category, price, description, ingredients } = request.body
+        const ingredientsArray = ingredients.split(',');
         const { id } = request.params
         const avatarFilename = request.file ? request.file.filename : ''
 
@@ -62,7 +64,25 @@ class DishsController {
             dish.filename = filename
         }
 
+        dish.name = name
+        dish.category = category
+        dish.price = price
+        dish.description = description
+
         await knex("dishs").update(dish).where({ id })
+
+        await knex("ingredients").where({ dish_id: id }).delete();
+
+        const ingredientsInsert = ingredientsArray.map(ingredient => {
+            return {
+                dish_id: id,
+                name: ingredient
+            }
+        })
+
+        await knex("ingredients").insert(ingredientsInsert)
+
+        return response.json()
     }
 
     async index(request, response){
