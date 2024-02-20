@@ -92,6 +92,14 @@ class DishsController {
 
         return response.json(dishs)
     }
+
+    async delete(request, response){
+        const { id } = request.params
+
+        await knex("dishs").where({ id }).delete();
+
+        return response.json()
+    }
 }
 
 module.exports = DishsController

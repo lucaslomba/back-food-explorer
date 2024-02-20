@@ -15,5 +15,6 @@ dishsRoutes.post("/",ensureAuthenticated, upload.single("dishFile"), dishsContro
 dishsRoutes.get("/",ensureAuthenticated, dishsController.index)
 dishsRoutes.get("/:id",ensureAuthenticated, dishsController.show)
 dishsRoutes.patch("/:id", ensureAuthenticated, upload.single("dishFile"), dishsController.update)
+dishsRoutes.delete("/:id", ensureAuthenticated, dishsController.delete)
 
 module.exports = dishsRoutes
