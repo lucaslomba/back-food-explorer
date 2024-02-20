@@ -44,6 +44,27 @@ class DishsController {
         })
     }
 
+    async update(request, response){
+        const { id } = request.params
+        const avatarFilename = request.file ? request.file.filename : ''
+
+        const dish = await knex("dishs")
+            .where({ id }).first()
+
+        if(avatarFilename){
+            const diskStorage = new DiskStorage
+
+            if(dish.filename){
+                await diskStorage.deleteFile(dish.filename)
+            }
+
+            const filename = await diskStorage.saveFile(avatarFilename)
+            dish.filename = filename
+        }
+
+        await knex("dishs").update(dish).where({ id })
+    }
+
     async index(request, response){
         const { type, search } = request.query
 
